@@ -10,6 +10,7 @@ namespace VY1.Controllers
     public class HomeController : Controller
     {
         private DB db = new DB();
+
         public ActionResult Index()
         {
             return View();
