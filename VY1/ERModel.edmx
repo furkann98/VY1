@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Linjes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Navn" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LinjeStasjons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Linje_Id" Type="int" />
+          <Property Name="Stasjon_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="StasjonLinjes">
+          <Key>
+            <PropertyRef Name="Stasjon_Id" />
+            <PropertyRef Name="Linje_Id" />
+          </Key>
+          <Property Name="Stasjon_Id" Type="int" Nullable="false" />
+          <Property Name="Linje_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stasjons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Navn" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_dbo_LinjeStasjons_dbo_Linjes_Linje_Id">
+          <End Role="Linjes" Type="Self.Linjes" Multiplicity="0..1" />
+          <End Role="LinjeStasjons" Type="Self.LinjeStasjons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Linjes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinjeStasjons">
+              <PropertyRef Name="Linje_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LinjeStasjons_dbo_Stasjons_Stasjon_Id">
+          <End Role="Stasjons" Type="Self.Stasjons" Multiplicity="0..1" />
+          <End Role="LinjeStasjons" Type="Self.LinjeStasjons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stasjons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinjeStasjons">
+              <PropertyRef Name="Stasjon_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_StasjonLinjes_dbo_Linjes_Linje_Id">
+          <End Role="Linjes" Type="Self.Linjes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StasjonLinjes" Type="Self.StasjonLinjes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Linjes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StasjonLinjes">
+              <PropertyRef Name="Linje_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_StasjonLinjes_dbo_Stasjons_Stasjon_Id">
+          <End Role="Stasjons" Type="Self.Stasjons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StasjonLinjes" Type="Self.StasjonLinjes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stasjons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StasjonLinjes">
+              <PropertyRef Name="Stasjon_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database1ModelStoreContainer">
+          <EntitySet Name="Linjes" EntityType="Self.Linjes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LinjeStasjons" EntityType="Self.LinjeStasjons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StasjonLinjes" EntityType="Self.StasjonLinjes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stasjons" EntityType="Self.Stasjons" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_LinjeStasjons_dbo_Linjes_Linje_Id" Association="Self.FK_dbo_LinjeStasjons_dbo_Linjes_Linje_Id">
+            <End Role="Linjes" EntitySet="Linjes" />
+            <End Role="LinjeStasjons" EntitySet="LinjeStasjons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LinjeStasjons_dbo_Stasjons_Stasjon_Id" Association="Self.FK_dbo_LinjeStasjons_dbo_Stasjons_Stasjon_Id">
+            <End Role="Stasjons" EntitySet="Stasjons" />
+            <End Role="LinjeStasjons" EntitySet="LinjeStasjons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_StasjonLinjes_dbo_Linjes_Linje_Id" Association="Self.FK_dbo_StasjonLinjes_dbo_Linjes_Linje_Id">
+            <End Role="Linjes" EntitySet="Linjes" />
+            <End Role="StasjonLinjes" EntitySet="StasjonLinjes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_StasjonLinjes_dbo_Stasjons_Stasjon_Id" Association="Self.FK_dbo_StasjonLinjes_dbo_Stasjons_Stasjon_Id">
+            <End Role="Stasjons" EntitySet="Stasjons" />
+            <End Role="StasjonLinjes" EntitySet="StasjonLinjes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Linjes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Navn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LinjeStasjons" Relationship="Self.FK_dbo_LinjeStasjons_dbo_Linjes_Linje_Id" FromRole="Linjes" ToRole="LinjeStasjons" />
+          <NavigationProperty Name="Stasjons" Relationship="Self.StasjonLinjes" FromRole="Linjes" ToRole="Stasjons" />
+        </EntityType>
+        <EntityType Name="LinjeStasjons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Linje_Id" Type="Int32" />
+          <Property Name="Stasjon_Id" Type="Int32" />
+          <NavigationProperty Name="Linjes" Relationship="Self.FK_dbo_LinjeStasjons_dbo_Linjes_Linje_Id" FromRole="LinjeStasjons" ToRole="Linjes" />
+          <NavigationProperty Name="Stasjons" Relationship="Self.FK_dbo_LinjeStasjons_dbo_Stasjons_Stasjon_Id" FromRole="LinjeStasjons" ToRole="Stasjons" />
+        </EntityType>
+        <EntityType Name="Stasjons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Navn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LinjeStasjons" Relationship="Self.FK_dbo_LinjeStasjons_dbo_Stasjons_Stasjon_Id" FromRole="Stasjons" ToRole="LinjeStasjons" />
+          <NavigationProperty Name="Linjes" Relationship="Self.StasjonLinjes" FromRole="Stasjons" ToRole="Linjes" />
+        </EntityType>
+        <Association Name="FK_dbo_LinjeStasjons_dbo_Linjes_Linje_Id">
+          <End Role="Linjes" Type="Self.Linjes" Multiplicity="0..1" />
+          <End Role="LinjeStasjons" Type="Self.LinjeStasjons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Linjes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinjeStasjons">
+              <PropertyRef Name="Linje_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LinjeStasjons_dbo_Stasjons_Stasjon_Id">
+          <End Role="Stasjons" Type="Self.Stasjons" Multiplicity="0..1" />
+          <End Role="LinjeStasjons" Type="Self.LinjeStasjons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stasjons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinjeStasjons">
+              <PropertyRef Name="Stasjon_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StasjonLinjes">
+          <End Role="Linjes" Type="Self.Linjes" Multiplicity="*" />
+          <End Role="Stasjons" Type="Self.Stasjons" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Linjes" EntityType="Self.Linjes" />
+          <EntitySet Name="LinjeStasjons" EntityType="Self.LinjeStasjons" />
+          <EntitySet Name="Stasjons" EntityType="Self.Stasjons" />
+          <AssociationSet Name="FK_dbo_LinjeStasjons_dbo_Linjes_Linje_Id" Association="Self.FK_dbo_LinjeStasjons_dbo_Linjes_Linje_Id">
+            <End Role="Linjes" EntitySet="Linjes" />
+            <End Role="LinjeStasjons" EntitySet="LinjeStasjons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LinjeStasjons_dbo_Stasjons_Stasjon_Id" Association="Self.FK_dbo_LinjeStasjons_dbo_Stasjons_Stasjon_Id">
+            <End Role="Stasjons" EntitySet="Stasjons" />
+            <End Role="LinjeStasjons" EntitySet="LinjeStasjons" />
+          </AssociationSet>
+          <AssociationSet Name="StasjonLinjes" Association="Self.StasjonLinjes">
+            <End Role="Linjes" EntitySet="Linjes" />
+            <End Role="Stasjons" EntitySet="Stasjons" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities">
+          <EntitySetMapping Name="Linjes">
+            <EntityTypeMapping TypeName="Database1Model.Linjes">
+              <MappingFragment StoreEntitySet="Linjes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Navn" ColumnName="Navn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LinjeStasjons">
+            <EntityTypeMapping TypeName="Database1Model.LinjeStasjons">
+              <MappingFragment StoreEntitySet="LinjeStasjons">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Linje_Id" ColumnName="Linje_Id" />
+                <ScalarProperty Name="Stasjon_Id" ColumnName="Stasjon_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stasjons">
+            <EntityTypeMapping TypeName="Database1Model.Stasjons">
+              <MappingFragment StoreEntitySet="Stasjons">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Navn" ColumnName="Navn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="StasjonLinjes" TypeName="Database1Model.StasjonLinjes" StoreEntitySet="StasjonLinjes">
+            <EndProperty Name="Linjes">
+              <ScalarProperty Name="Id" ColumnName="Linje_Id" />
+            </EndProperty>
+            <EndProperty Name="Stasjons">
+              <ScalarProperty Name="Id" ColumnName="Stasjon_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

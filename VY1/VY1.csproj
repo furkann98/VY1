@@ -131,6 +131,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB.cs" />
+    <Compile Include="Models\DBInit.cs" />
+    <Compile Include="Models\Linje.cs" />
+    <Compile Include="Models\LinjeStasjon.cs" />
+    <Compile Include="Models\Stasjon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -212,7 +217,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

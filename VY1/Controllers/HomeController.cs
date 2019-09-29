@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using VY1.Models;
 
 namespace VY1.Controllers
 {
     public class HomeController : Controller
     {
+        private DB db = new DB();
         public ActionResult Index()
         {
             return View();
